@@ -4,7 +4,7 @@ import clsx from "clsx";
 import "./Sections/Home/HomeSections.css";
 import { RippleButton } from "./magicui/ripple-button";
 
-type Props = {};
+type Props = object;
 
 export default function ProjectCard({}: Props) {
   return (
