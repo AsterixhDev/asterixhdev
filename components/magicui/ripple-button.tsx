@@ -1,13 +1,38 @@
 "use client";
-
 import { cn } from "@/lib/utils";
 import React, { MouseEvent, useEffect, useState } from "react";
+
+export type ButtonVariant = "default" | "primary" | "secondary" | "destructive";
+
+interface RippleButtonOtherClasses {
+  children?: string;
+  rippleContainer?: string;
+  ripple?: string;
+}
 
 interface RippleButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   rippleColor?: string;
   duration?: string;
+  variant?: ButtonVariant;
+  otherClasses?: RippleButtonOtherClasses;
 }
+
+// Base variant styling for the button
+const variantClasses: Record<ButtonVariant, string> = {
+  default: "bg-background/20 text-foreground",
+  primary: "bg-primary/20 text-primary-foreground",
+  secondary: "bg-secondary/20 text-secondary-foreground",
+  destructive: "bg-destructive/20 text-white",
+};
+
+// Default ripple colors based on variant (if rippleColor prop is not provided)
+const defaultRippleColors: Record<ButtonVariant, string> = {
+  default: "#ffffff",
+  primary: "#ffffff",
+  secondary: "#ffffff",
+  destructive: "rgba(255, 0, 0, 0.3)",
+};
 
 export const RippleButton = React.forwardRef<
   HTMLButtonElement,
@@ -17,9 +42,11 @@ export const RippleButton = React.forwardRef<
     {
       className,
       children,
-      rippleColor = "#ffffff",
+      rippleColor,
       duration = "600ms",
+      variant = "default",
       onClick,
+      otherClasses,
       ...props
     },
     ref,
@@ -27,6 +54,9 @@ export const RippleButton = React.forwardRef<
     const [buttonRipples, setButtonRipples] = useState<
       Array<{ x: number; y: number; size: number; key: number }>
     >([]);
+
+    // Determine the final ripple color based on variant (if not overridden)
+    const finalRippleColor = rippleColor || defaultRippleColors[variant];
 
     const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
       createRipple(event);
@@ -49,7 +79,7 @@ export const RippleButton = React.forwardRef<
         const lastRipple = buttonRipples[buttonRipples.length - 1];
         const timeout = setTimeout(() => {
           setButtonRipples((prevRipples) =>
-            prevRipples.filter((ripple) => ripple.key !== lastRipple.key),
+            prevRipples.filter((ripple) => ripple.key !== lastRipple.key)
           );
         }, parseInt(duration));
         return () => clearTimeout(timeout);
@@ -59,25 +89,39 @@ export const RippleButton = React.forwardRef<
     return (
       <button
         className={cn(
-          "relative flex cursor-pointer items-center justify-center overflow-hidden rounded-lg border-2 bg-background px-4 py-2 text-center text-primary",
-          className,
+          "relative flex cursor-pointer items-center justify-center overflow-hidden rounded-lg px-4 py-2 text-center transition-colors duration-300",
+          // Merge variant-specific styles into base classes
+          variantClasses[variant],
+          className
         )}
         onClick={handleClick}
         ref={ref}
         {...props}
       >
-        <div className="relative z-10">{children}</div>
-        <span className="pointer-events-none absolute inset-0">
+        {/* Content container */}
+        <div className={cn("relative z-10", otherClasses?.children)}>
+          {children}
+        </div>
+        {/* Ripple container */}
+        <span
+          className={cn(
+            "pointer-events-none absolute inset-0",
+            otherClasses?.rippleContainer
+          )}
+        >
           {buttonRipples.map((ripple) => (
             <span
-              className="absolute animate-rippling rounded-full bg-background opacity-30"
+              className={cn(
+                "absolute animate-rippling rounded-full opacity-30",
+                otherClasses?.ripple
+              )}
               key={ripple.key}
               style={{
                 width: `${ripple.size}px`,
                 height: `${ripple.size}px`,
                 top: `${ripple.y}px`,
                 left: `${ripple.x}px`,
-                backgroundColor: rippleColor,
+                backgroundColor: finalRippleColor,
                 transform: `scale(0)`,
               }}
             />
@@ -85,7 +129,7 @@ export const RippleButton = React.forwardRef<
         </span>
       </button>
     );
-  },
+  }
 );
 
 RippleButton.displayName = "RippleButton";

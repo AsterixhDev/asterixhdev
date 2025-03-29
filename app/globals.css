@@ -45,6 +45,8 @@
   --animate-meteor: meteor 10s linear infinite;
   --animate-conic: conicAnimation 10s linear infinite;
   --animate-bounce-y: bounceCustomY 1s infinite;
+  --animate-rippling: rippling 1s linear infinite;
+  
   
 }
 
@@ -187,10 +189,6 @@
 }
 }
 
-/* header */
-.navlinks {
-  @apply text-sm font-medium text-white transition-colors duration-300 relative;
-}
 
 /* Hover state for text color */
 .navlinks:hover {
@@ -247,4 +245,15 @@
     transform: none;
     animation-timing-function: cubic-bezier(0, 0, .2, 1);
 }
+}
+@keyframes rippling{
+   
+    0% {
+      opacity: 1;
+    }
+    100% {
+      transform: scale(2);
+      opacity: 0;
+    }
+  
 }
