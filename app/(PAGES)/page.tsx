@@ -46,7 +46,7 @@ export default function Home() {
             developer
           </p>
         </div>
-        <div className="flex flex-col justify-center items-center gap-4">
+        <div className="flex flex-col justify-center items-center gap-10">
           <span style={{"--y": "20px"} as React.CSSProperties} className="block drop-shadow-md [--y:20px] animate-[bounceCustomY_10s_infinite] relative w-full isolate pointer-events-none">
             <Blob1 className="size-full" imageFill="/images/my-images/1.jpg" />
             <span className="size-full absolute -z-10 left-1/2 top-1/2 -translate-1/2">
