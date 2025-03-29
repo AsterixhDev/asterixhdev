@@ -1,0 +1,24 @@
+/* Using Tailwind property syntax for pseudo states */
+
+/* On hover, scale the dot element */
+.interactiveHoverButton:hover .hovered1 {
+    /* group-hover:scale-[100.8] converted to CSS scale value.
+       Note: 100.8% equals scale(1.008) */
+    scale: 1.008;
+}
+
+/* On hover, translate and fade out the text element */
+.interactiveHoverButton:hover .hovered2 {
+    /* group-hover:translate-x-12 and group-hover:opacity-0 using Tailwind property syntax */
+    --tw-translate-x: calc(var(--spacing) * 12); /* 3rem = 48px */
+    translate: var(--tw-translate-x) var(--tw-translate-y);
+    opacity: 0%;
+}
+
+/* On hover, translate and fade in the secondary content */
+.interactiveHoverButton:hover .hovered3 {
+    /* group-hover:-translate-x-5 and group-hover:opacity-100 using Tailwind property syntax */
+    --tw-translate-x: calc(var(--spacing) * -5); /* -1.25rem = -20px */
+    translate: var(--tw-translate-x) var(--tw-translate-y);
+    opacity: 100%;
+}

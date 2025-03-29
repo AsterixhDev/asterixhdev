@@ -1,0 +1,24 @@
+.animatedTerminal:hover::before,
+.animatedTerminal:hover::after {
+  content: var(--tw-content);
+  animation-play-state: paused;
+}
+
+.aboutWriteup:hover {
+  --tw-scale-x: 105%;
+  --tw-scale-y: 105%;
+  --tw-scale-z: 105%;
+  scale: var(--tw-scale-x) var(--tw-scale-y);
+}
+
+.projectCard:hover::before,
+.projectCard:hover::after{
+    opacity: 1;
+}
+
+.projectCard:hover .content{
+    top: calc(var(--spacing)  * 10);
+    border-top-left-radius: var(--radius-3xl) /* 1.5rem = 24px */;
+    border-top-right-radius: var(--radius-3xl) /* 1.5rem = 24px */;
+    padding-block: calc(var(--spacing) * 4)
+}

@@ -1,0 +1,250 @@
+@import 'primeicons/primeicons.css';
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --animate-meteor: meteor 10s linear infinite;
+  --animate-conic: conicAnimation 10s linear infinite;
+  --animate-bounce-y: bounceCustomY 1s infinite;
+  
+}
+
+:root {
+  --radius: 0.625rem;
+  /* Use #072126 for the background areas */
+  --background: #072126;
+  --foreground: #ffffff;
+  --card: #072126;
+  --card-foreground: #ffffff;
+  --popover: #072126;
+  --popover-foreground: #ffffff;
+  
+  /* Use #9e7dff as the primary color */
+  --primary: #9e7dff;
+  --primary-foreground: #ffffff;
+  
+  /* Use #488190 as the secondary color */
+  --secondary: #488190;
+  --secondary-foreground: #ffffff;
+  
+  /* Use #005368 as the muted/accent color */
+  --muted: #005368;
+  --muted-foreground: #ffffff;
+  --accent: #005368;
+  --accent-foreground: #ffffff;
+  
+  --destructive: #ff0000;
+  --border: #ffffff;
+  --input: #ffffff;
+  --ring: #9e7dff;
+  --chart-1: #9e7dff;
+  --chart-2: #488190;
+  --chart-3: #005368;
+  --chart-4: #072126;
+  --chart-5: #9e7dff;
+  --sidebar: #072126;
+  --sidebar-foreground: #ffffff;
+  --sidebar-primary: #9e7dff;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #005368;
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: #ffffff;
+  --sidebar-ring: #9e7dff;
+}
+
+.dark {
+  /* Apply the same major colors for dark mode; adjust if needed */
+  --background: #072126;
+  --foreground: #ffffff;
+  --card: #072126;
+  --card-foreground: #ffffff;
+  --popover: #072126;
+  --popover-foreground: #ffffff;
+  
+  --primary: #9e7dff;
+  --primary-foreground: #ffffff;
+  
+  --secondary: #488190;
+  --secondary-foreground: #ffffff;
+  
+  --muted: #005368;
+  --muted-foreground: #ffffff;
+  --accent: #005368;
+  --accent-foreground: #ffffff;
+  
+  --destructive: #ff0000;
+  --border: #ffffff;
+  --input: #ffffff;
+  --ring: #9e7dff;
+  --chart-1: #9e7dff;
+  --chart-2: #488190;
+  --chart-3: #005368;
+  --chart-4: #072126;
+  --chart-5: #9e7dff;
+  --sidebar: #072126;
+  --sidebar-foreground: #ffffff;
+  --sidebar-primary: #9e7dff;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #005368;
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: #ffffff;
+  --sidebar-ring: #9e7dff;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+
+/* animations */
+
+.bg-conic::before,.bg-conic::after {
+  background: conic-gradient(
+    from var(--angle),
+    var(--chart-1) 0deg,
+    var(--chart-1) 72deg,
+    var(--chart-2) 72deg,
+    var(--chart-2) 144deg,
+    var(--chart-3) 144deg,
+    var(--chart-3) 216deg,
+    var(--chart-4) 216deg,
+    var(--chart-4) 288deg,
+    transparent 288deg,
+    transparent 360deg
+  );
+}
+
+@property --angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+@keyframes conicAnimation {
+  0% {
+    --angle: 0deg;
+  }
+  100% {
+    --angle: 360deg;
+  }
+}
+
+@keyframes meteor {
+  0% {
+    opacity: 1;
+    transform: rotate(var(--angle)) translateX(0);
+}
+70% {
+    opacity: 1;
+}
+100% {
+    opacity: 0;
+    transform: rotate(var(--angle)) translateX(-500px);
+}
+}
+
+/* header */
+.navlinks {
+  @apply text-sm font-medium text-white transition-colors duration-300 relative;
+}
+
+/* Hover state for text color */
+.navlinks:hover {
+  @apply text-primary;
+}
+
+/* Before pseudo-element styling (normal state) */
+.navlinks::before {
+  @apply w-0 absolute h-[2px] left-1/2 -translate-x-1/2 bg-gradient-to-r from-secondary to-primary duration-500 bottom-1 rounded-full delay-150;
+}
+
+/* Hover state for before pseudo-element (overrides width) */
+.navlinks:hover::before {
+  @apply w-full;
+}
+
+/* Responsive override for the before pseudo-element at the sm breakpoint */
+@media (min-width: 640px) {
+  .navlinks::before {
+    bottom: -0.25rem; /* Corresponds to sm:before:-bottom-1 */
+  }
+}
+
+
+/* home styles */
+.socialLinks{
+  @apply w-fit px-4 max-w-full flex items-center justify-center duration-300  gap-2 bg-primary-foreground/30 hover:px-4 hover:gap-4 backdrop-blur-3xl p-2 rounded-full;
+}
+.socialLinks:hover{
+  gap: calc(var(--spacing) * 4);
+  padding-inline: calc(var(--spacing) * 4);
+}
+.socialLinks>li{
+  @apply size-10 flex items-center justify-center text-2xl text-white dark:text-black hover:mx-2 hover:bg-muted cursor-pointer p-2 aspect-square rounded-full duration-300;
+}
+.socialLinks>li:hover{
+  background-color: var(--muted);
+  margin-inline: calc(var(--spacing) * 2);
+}
+
+@property --y {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0px;
+}
+
+@keyframes bounceCustomY {
+  0%, 100% {
+    transform: translateY(var(--y));
+    animation-timing-function: cubic-bezier(.8, 0, 1, 1);
+}
+
+50% {
+    transform: none;
+    animation-timing-function: cubic-bezier(0, 0, .2, 1);
+}
+}
