@@ -1,7 +1,7 @@
 "use client";
 
 import ProjectCard from "@/components/ProjectCard";
-import { VariantInteractiveButton } from "@/components/magicui/interactive-hover-button";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import clsx from "clsx";
 import { Variants } from "motion/react";
 import * as motion from "motion/react-client";
@@ -27,27 +27,47 @@ export default function Projects() {
       >
         Projects
       </h1>
-
-      <ul className="w-full grid grid-cols-[repeat(auto-fill,_minmax(250px,_1fr))] gap-4">
-        <ProjectCard />
-        <ProjectCard />
-        <ProjectCard />
-      </ul>
-      <div className="w-full flex items-center justify-center">
-      <VariantInteractiveButton
-        secondaryHoverContent={
-          <>
-            <span>See all projects</span>
-            <i className="pi pi-arrow-right"></i>
-          </>
-        }
-        variant="secondary"
-        className="ml-4 !rounded-lg"
-        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-      >
-        See all projects
-      </VariantInteractiveButton>
+      <div className="w-full">
+        <p className="text-muted-foreground text-sm mt-1">
+          Here are some of my projects that I have worked on. You can check them
+          out on my GitHub or GitLab.
+        </p>
+        <p className="text-muted-foreground text-sm mt-1">
+          I am currently working on a few more projects that will be released
+          soon. Stay tuned!
+        </p>
       </div>
+
+      
+      <Tabs defaultValue="all" className="w-full">
+        <TabsList className="w-1/2 mx-auto mb-4">
+          <TabsTrigger value="all" className="cursor-pointer *:duration-300">All</TabsTrigger>
+          <TabsTrigger value="personal" className="cursor-pointer *:duration-300">Personal</TabsTrigger>
+          <TabsTrigger value="best" className="cursor-pointer *:duration-300">Best</TabsTrigger>
+        </TabsList>
+        <TabsContent value="all">
+          <ul className="w-full grid grid-cols-[repeat(auto-fill,_minmax(250px,_1fr))] gap-4">
+            <ProjectCard />
+            <ProjectCard />
+            <ProjectCard />
+          </ul>
+        </TabsContent>
+        <TabsContent value="personal">
+          <ul className="w-full grid grid-cols-[repeat(auto-fill,_minmax(250px,_1fr))] gap-4">
+            <ProjectCard />
+            <ProjectCard />
+            <ProjectCard />
+          </ul>
+        </TabsContent>
+        <TabsContent value="best">
+          <ul className="w-full grid grid-cols-[repeat(auto-fill,_minmax(250px,_1fr))] gap-4">
+            <ProjectCard />
+            <ProjectCard />
+            <ProjectCard />
+          </ul>
+        </TabsContent>
+      </Tabs>
+      
     </motion.div>
   );
 }
