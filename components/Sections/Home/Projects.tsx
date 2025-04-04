@@ -3,21 +3,14 @@
 import ProjectCard from "@/components/ProjectCard";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import clsx from "clsx";
-import { Variants } from "motion/react";
 import * as motion from "motion/react-client";
 
 export default function Projects() {
-  const section2Variants: Variants = {
-    offscreen: { opacity: 0, scale: 0.9 },
-    onscreen: { opacity: 1, scale: 1 },
-  };
+ 
   return (
     <motion.div
       className="w-full mx-auto flex flex-col gap-5 bg-black px-4 sm:px-10 lg:px-30 py-10"
-      initial="offscreen"
-      whileInView="onscreen"
-      viewport={{ amount: 0.1 }}
-      variants={section2Variants}
+      
     >
       <h1
         className={clsx(
@@ -25,7 +18,7 @@ export default function Projects() {
           "before:absolute before:top-1/2 before:left-0 before:-translate-y-1/2 before:h-full before:w-1 rounded-full before:bg-gradient-to-b before:from-secondary before:to-primary"
         )}
       >
-        Projects
+        Projects & Experiences
       </h1>
       <div className="w-full">
         <p className="text-muted-foreground text-sm mt-1">
@@ -60,7 +53,7 @@ export default function Projects() {
           </ul>
         </TabsContent>
         <TabsContent value="best">
-          <ul className="w-full grid grid-cols-[repeat(auto-fill,_minmax(250px,_1fr))] gap-4">
+        <ul className="w-full grid grid-cols-[repeat(auto-fill,_minmax(250px,_1fr))] gap-4">
             <ProjectCard />
             <ProjectCard />
             <ProjectCard />

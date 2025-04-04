@@ -2,26 +2,15 @@ import { Meteors } from "@/components/magicui/meteors";
 import { motion } from "@/components/motion";
 import Blob1 from "@/components/shapes/blobs";
 import clsx from "clsx";
-import { Variants } from "motion/react";
 import React from "react";
 
 export default function Main() {
-  const sectionVariants: Variants = {
-    offscreen: { opacity: 0, scale: 0.9 },
-    onscreen: { opacity: 1, scale: 1 },
-  };
   return (
     <>
       <span className="size-full overflow-hidden absolute inset-0 -z-10 pointer-events-none">
         <Meteors minDuration={50} number={100} angle={120} />
       </span>
-      <motion.section
-        initial="offscreen"
-        whileInView="onscreen"
-        viewport={{ amount: 0.1 }}
-        variants={sectionVariants}
-        className="w-full h-fit py-30 items-center gap-10 sm:gap-5 sm:items-start justify-center px-4 sm:px-10 lg:px-30 flex flex-col min-[498px]:grid min-[498px]:grid-cols-2"
-      >
+      <motion.section className="w-full h-fit py-30 items-center gap-10 sm:gap-5 sm:items-start justify-center px-4 sm:px-10 lg:px-30 flex flex-col min-[498px]:grid min-[498px]:grid-cols-2">
         <div className="flex justify-center h-full flex-col gap-4">
           <h1 className="text-7xl min-[498px]:text-5xl xl:text-8xl font-extrabold text-white tracking-tight leading-snug drop-shadow-lg">
             Hello, I&apos;m <br />
@@ -82,25 +71,31 @@ export default function Main() {
           </ul>
         </div>
         <div className="w-full flex justify-between items-center gap-6">
-            <div className="flex flex-col items-center">
-              <span className="text-3xl font-bold text-primary-foreground">2+</span>
-              <span className="mt-1 text-xs font-medium text-center">
-                <strong className="text-primary">Years Experience</strong>
-              </span>
-            </div>
-            <div className="flex flex-col items-center">
-              <span className="text-3xl font-bold text-primary-foreground">10+</span>
-              <span className="mt-1 text-xs font-medium text-center">
-                <strong className="text-primary">Completed Projects</strong>
-              </span>
-            </div>
-            <div className="flex flex-col items-center">
-              <span className="text-3xl font-bold text-primary-foreground">3+</span>
-              <span className="mt-1 text-xs font-medium text-center">
-                <strong className="text-primary">Satisfied Clients</strong>
-              </span>
-            </div>
+          <div className="flex flex-col items-center">
+            <span className="text-3xl font-bold text-primary-foreground">
+              2+
+            </span>
+            <span className="mt-1 text-xs font-medium text-center">
+              <strong className="text-primary">Years Experience</strong>
+            </span>
           </div>
+          <div className="flex flex-col items-center">
+            <span className="text-3xl font-bold text-primary-foreground">
+              10+
+            </span>
+            <span className="mt-1 text-xs font-medium text-center">
+              <strong className="text-primary">Completed Projects</strong>
+            </span>
+          </div>
+          <div className="flex flex-col items-center">
+            <span className="text-3xl font-bold text-primary-foreground">
+              3+
+            </span>
+            <span className="mt-1 text-xs font-medium text-center">
+              <strong className="text-primary">Satisfied Clients</strong>
+            </span>
+          </div>
+        </div>
       </motion.section>
     </>
   );

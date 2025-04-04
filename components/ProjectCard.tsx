@@ -4,9 +4,12 @@ import clsx from "clsx";
 import "./Sections/Home/HomeSections.css";
 import { RippleButton } from "./magicui/ripple-button";
 
-type Props = object;
+type Props = {
+  className?: string;
+  
+};
 
-export default function ProjectCard({}: Props) {
+export default function ProjectCard({className}: Props) {
   return (
     <li
       className={clsx(
@@ -24,7 +27,8 @@ export default function ProjectCard({}: Props) {
         "before:animate-conic",
         "after:animate-conic",
         "before:rounded-xl after:rounded-3xl",
-        "before:box-content after:box-content"
+        "before:box-content after:box-content",
+        className
       )}
     >
       <div className="size-full bg-black rounded-3xl overflow-hidden relative flex flex-col gap-2">
@@ -36,11 +40,16 @@ export default function ProjectCard({}: Props) {
           />
           <strong className="text-3xl sm:text-4xl">01</strong>
         </span>
-        <div className="absolute flex flex-col justify-between content py-0 px-4 duration-500 h-[calc(100%-var(--spacing)_*_10)] w-full top-[calc(100%-var(--spacing)_*_10)] bg-muted rounded-t-xl">
+        <div className="absolute flex flex-col justify-between content py-2 px-4 duration-500 h-[calc(100%-var(--spacing)_*_10)] w-full top-[calc(100%-var(--spacing)_*_14)] bg-muted rounded-t-xl">
           <div className="w-full flex flex-col gap-2">
+          <div className=".w-full flex justify-between items-center gap-2">
           <h3 className="text-lg h-10 flex items-center font-bold">
             Project name
           </h3>
+          <RippleButton className="!rounded-full shrink-0 bg-primary/40 border-none !size-10 *:!p-0 *:flex *:items-center *:justify-center">
+                    <i className="pi pi-github text-primary-foreground size-full block"></i>
+                </RippleButton>
+          </div>
           <p className="line-clamp-6">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam,
             quo architecto iste magni tempora blanditiis deleniti perspiciatis
@@ -57,9 +66,6 @@ export default function ProjectCard({}: Props) {
           </p>
           </div>
             <div className="w-full flex gap-2">
-                <RippleButton className="!rounded-full shrink-0 bg-primary/40 border-none !size-10 *:!p-0 *:flex *:items-center *:justify-center">
-                    <i className="pi pi-github text-primary-foreground size-full block"></i>
-                </RippleButton>
                 <RippleButton className="bg-black border-none text-primary-foreground !px-10 *:!flex *:!items-center *:!gap-2">
                 Visit
                 <i className="pi pi-globe"></i>

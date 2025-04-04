@@ -63,9 +63,9 @@ export default function SkillTerminal({ shown, handleskillClick }: Props) {
             </TypingAnimation>
             <VariantInteractiveButton
               onClick={handleskillClick}
-              className="text-primary hover:underline underline-offset-2"
+              className="text-muted-foreground hover:underline underline-offset-2"
             >
-              <TypingAnimation delay={8000}>See all</TypingAnimation>
+              <TypingAnimation delay={7000}>See all</TypingAnimation>
             </VariantInteractiveButton>
           </AnimatedSpan>
         </>

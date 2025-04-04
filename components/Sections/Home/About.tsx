@@ -2,7 +2,6 @@
 
 import { VariantInteractiveButton } from "@/components/magicui/interactive-hover-button";
 import clsx from "clsx";
-import { Variants } from "motion/react";
 import * as motion from "motion/react-client";
 import { useState } from "react";
 import "./HomeSections.css";
@@ -12,10 +11,7 @@ import SkillsFull from "./SkillsFull";
 export default function AboutSection() {
   const [shown, setShown] = useState(false);
   const [shownFullSkill, setShownFullSkill] = useState(false);
-  const section2Variants: Variants = {
-    offscreen: { opacity: 0, scale: 0.9 },
-    onscreen: { opacity: 1, scale: 1 },
-  };
+
 
   const handleSkillClick = () => {
     setShownFullSkill(!shownFullSkill);
@@ -28,8 +24,7 @@ export default function AboutSection() {
       className="w-full mx-auto rounded-t-4xl flex flex-col gap-5 h-fit bg-primary/30 backdrop-blur-3xl px-4 sm:px-10 lg:px-30 py-10"
       initial="offscreen"
       whileInView="onscreen"
-      viewport={{ amount: 0.1 }}
-      variants={section2Variants}
+      
     >
       <h1
         className={clsx(
@@ -41,9 +36,6 @@ export default function AboutSection() {
       </h1>
       <div className="grid grid-cols-1 mt-10 relative sm:grid-cols-2 gap-6 isolate">
         <motion.div
-          initial={"offscreen"}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.5 }}
           className={clsx(
             "bg-secondary/20 bg-conic grid grid-cols-1 backdrop-blur-lg h-fit min-h-full rounded-lg shadow-md",
             "before:absolute after:absolute",
