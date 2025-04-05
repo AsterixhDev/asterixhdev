@@ -46,7 +46,7 @@
   --animate-conic: conicAnimation 10s linear infinite;
   --animate-bounce-y: bounceCustomY 1s infinite;
   --animate-rippling: rippling 1s linear infinite;
-  
+  --animate-orbit: orbit calc(var(--duration)* 1s) linear infinite;
   
 }
 
@@ -191,9 +191,8 @@
 
 
 /* Hover state for text color */
-.navlinks:hover {
-  @apply text-primary;
-}
+
+
 
 /* Before pseudo-element styling (normal state) */
 .navlinks::before {
@@ -256,4 +255,14 @@
       opacity: 0;
     }
   
+}
+
+@keyframes orbit {
+  0% {
+    transform: rotate(calc(var(--angle)* 1deg)) translateY(calc(var(--radius)* 1px)) rotate(calc(var(--angle)* -1deg));
+}
+
+100% {
+    transform: rotate(calc(var(--angle)* 1deg + 1turn)) translateY(calc(var(--radius)* 1px)) rotate(calc(var(--angle)* -1deg - 1turn));
+}
 }

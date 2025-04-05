@@ -5,17 +5,20 @@ import { WordRotate } from "@/components/magicui/word-rotate";
 import { useIsMobile } from "@/lib/hooks/useMobile";
 import clsx from "clsx";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 export default function Header() {
   const [dropped, setDropped] = useState(false)
   const isMobile = useIsMobile(768)
+  const currentPath = usePathname()
   const links = {
     About: "#about",
     Projects: "#projects",
     Skills: "#projects",
     Contact: "#contact",
   } as const;
+
   return (
     <header className="sticky w-[95vw] sm:w-[90vw]  top-2 rounded-full mx-auto right-0 z-50 bg-black/60 backdrop-blur-lg border-b border-gray-800">
       <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
@@ -39,7 +42,15 @@ export default function Header() {
             <Link
               key={link}
               href={links[link]}
-              className="text-lg md:text-sm font-medium text-white transition-colors duration-300 relative"
+              className={
+                clsx(
+                  "navlinks text-lg md:text-sm font-medium text-white transition-colors duration-300 relative",
+                  "before:w-0 before:absolute before:h-[2px] before:bg-gradient-to-r before:from-secondary before:to-primary",
+                  "hover:before:w-full hover:before:absolute hover:before:bg-gradient-to-r hover:before:from-secondary hover:before:to-primary",
+                  "before:duration-500 before:bottom-1 sm:before:-bottom-1 before:left-0 before:rounded-full before:delay-150",
+                  currentPath===links[link]&&"before:!w-1/2 before:!opacity-100",
+                )
+              }
             >
               {link}
             </Link>
@@ -58,7 +69,7 @@ export default function Header() {
         <VariantInteractiveButton variant="secondary" secondaryHoverContent={
           <>
           <span>Hire Me</span>
-          <i className="pi pi-briefcase"></i>
+          <i className="pi pi-arrow-up-right"></i>
           </>
         } className="ml-4 !rounded-lg" >
           Hire Me
