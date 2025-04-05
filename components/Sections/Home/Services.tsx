@@ -9,29 +9,30 @@ type Service = {
 const servicesData: Service[] = [
   {
     id: 1,
-    name: "Web Development",
+    name: "Front-End Development",
     description:
-      "Building responsive, interactive websites using modern technologies to deliver engaging user experiences.",
+      "Crafting responsive, interactive web interfaces with React, Next.js, and TypeScript to create engaging user experiences.",
   },
   {
     id: 2,
-    name: "Mobile Development",
+    name: "API Integration & Development",
     description:
-      "Creating cross-platform mobile applications with a focus on performance and usability.",
+      "Designing and integrating robust RESTful and GraphQL APIs to enable seamless communication between front-end and back-end systems.",
   },
   {
     id: 3,
-    name: "UI/UX Design",
+    name: "UI/UX Implementation",
     description:
-      "Designing intuitive interfaces and seamless user experiences with attention to detail.",
+      "Translating design prototypes into pixel-perfect, accessible interfaces that balance aesthetic appeal with usability.",
   },
   {
     id: 4,
-    name: "SEO Optimization",
+    name: "Performance Optimization",
     description:
-      "Improving search engine rankings through data-driven strategies and best practices.",
-  },
-];
+      "Enhancing application speed and scalability through code optimization, advanced caching strategies, and modern performance best practices.",
+  }
+]
+;
 
 // Helper function to split an array into chunks of a specified size.
 const chunkArray = (arr: Service[], chunkSize: number): Service[][] => {

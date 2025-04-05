@@ -94,7 +94,7 @@ export const VariantInteractiveButton = React.forwardRef<
             "absolute top-0 z-10 flex h-full w-full items-center justify-center gap-2 text-primary-foreground transition-all duration-300",
             isHovered
               ? "-translate-x-5 opacity-100"
-              : "translate-x-12 opacity-0",
+              : "!translate-x-12 !opacity-0",
             otherClasses?.secondaryHoverContent
           )}
         >
