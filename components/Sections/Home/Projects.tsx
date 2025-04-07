@@ -9,6 +9,7 @@ export default function Projects() {
  
   return (
     <motion.div
+    id="projects"
       className="w-full mx-auto flex flex-col gap-5 bg-black px-4 sm:px-10 lg:px-30 py-10"
       
     >

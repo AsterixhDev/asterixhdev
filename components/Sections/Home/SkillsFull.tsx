@@ -14,7 +14,7 @@ export function Skill(skill: skillprop) {
   return (
     
       <HoverCard>
-      <HoverCardTrigger><span className="flex bg-secondary/30 cursor-pointer flex-col border rounded-md gap-2 p-2 items-center justify-center">
+      <HoverCardTrigger><span className="flex bg-secondary/30 h-full text-center cursor-pointer flex-col border rounded-md gap-2 p-2 items-center justify-center">
         <em className="size-5">
           <StackIcon className="size-full" name={skill.icon} />
         </em>
