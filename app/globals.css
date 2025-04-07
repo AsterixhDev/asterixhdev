@@ -47,7 +47,7 @@
   --animate-bounce-y: bounceCustomY 1s infinite;
   --animate-rippling: rippling 1s linear infinite;
   --animate-orbit: orbit calc(var(--duration)* 1s) linear infinite;
-  
+
 }
 
 :root {
@@ -59,21 +59,21 @@
   --card-foreground: #ffffff;
   --popover: #072126;
   --popover-foreground: #ffffff;
-  
+
   /* Use #9e7dff as the primary color */
   --primary: #9e7dff;
   --primary-foreground: #ffffff;
-  
+
   /* Use #488190 as the secondary color */
   --secondary: #488190;
   --secondary-foreground: #ffffff;
-  
+
   /* Use #005368 as the muted/accent color */
   --muted: #005368;
   --muted-foreground: #ffffff;
   --accent: #005368;
   --accent-foreground: #ffffff;
-  
+
   --destructive: #ff0000;
   --border: #ffffff;
   --input: #ffffff;
@@ -101,18 +101,18 @@
   --card-foreground: #ffffff;
   --popover: #072126;
   --popover-foreground: #ffffff;
-  
+
   --primary: #9e7dff;
   --primary-foreground: #ffffff;
-  
+
   --secondary: #488190;
   --secondary-foreground: #ffffff;
-  
+
   --muted: #005368;
   --muted-foreground: #ffffff;
   --accent: #005368;
   --accent-foreground: #ffffff;
-  
+
   --destructive: #ff0000;
   --border: #ffffff;
   --input: #ffffff;
@@ -141,6 +141,9 @@
   }
 }
 
+*{
+  @apply select-text selection:text-muted selection:bg-foreground;
+}
 
 /* animations */
 
@@ -189,10 +192,7 @@
 }
 }
 
-
 /* Hover state for text color */
-
-
 
 /* Before pseudo-element styling (normal state) */
 .navlinks::before {
@@ -210,7 +210,6 @@
     bottom: -0.25rem; /* Corresponds to sm:before:-bottom-1 */
   }
 }
-
 
 /* home styles */
 .socialLinks{
@@ -246,7 +245,7 @@
 }
 }
 @keyframes rippling{
-   
+
     0% {
       opacity: 1;
     }
@@ -254,7 +253,7 @@
       transform: scale(2);
       opacity: 0;
     }
-  
+
 }
 
 @keyframes orbit {
