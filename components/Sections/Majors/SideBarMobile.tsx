@@ -1,18 +1,18 @@
 "use client"
 
 import {
-  Sidebar,
-  SidebarContent,
-  SidebarGroup,
-  SidebarGroupContent,
-  SidebarGroupLabel,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-} from "@/components/ui/sidebar"
-import { useIsMobile } from "@/lib/hooks/useMobile"
+    Sidebar,
+    SidebarContent,
+    SidebarGroup,
+    SidebarGroupContent,
+    SidebarGroupLabel,
+    SidebarMenu,
+    SidebarMenuButton,
+    SidebarMenuItem,
+} from "@/components/ui/sidebar";
+import { useIsMobile } from "@/lib/hooks/useMobile";
 import clsx from "clsx";
-import Link from "next/link";
+import ScrollToNavigator from "../scrolltonavigator";
 
 // Menu items.
 const PortfolioNavigations = [
@@ -33,7 +33,7 @@ const PortfolioNavigations = [
     },
     {
       title: "Contact",
-      url: "#",
+      url: "/#contact",
       icon: "pi-envelope", // Represents messaging or communication
     },
   ];
@@ -56,13 +56,13 @@ export function SideBarMobile() {
               {PortfolioNavigations.map((PortfolioNavigation) => (
                 <SidebarMenuItem key={PortfolioNavigation.title}>
                   <SidebarMenuButton asChild>
-                    <Link className="!text-base hover:!bg-background !py-5" href={PortfolioNavigation.url}>
+                    <ScrollToNavigator className="!text-base hover:!bg-background !py-5" to={PortfolioNavigation.url}>
                       <i className={clsx(
                         "pi",
                         PortfolioNavigation.icon,
                       )}></i>
                       <span>{PortfolioNavigation.title}</span>
-                    </Link>
+                    </ScrollToNavigator>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}

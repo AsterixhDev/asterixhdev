@@ -5,17 +5,17 @@ import { WordRotate } from "@/components/magicui/word-rotate";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { useIsMobile } from "@/lib/hooks/useMobile";
 import clsx from "clsx";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
+import ScrollToNavigator from "../scrolltonavigator";
 
 export default function Header() {
   const isMobile = useIsMobile(768)
   const currentPath = usePathname()
   const links = {
-    About: "#about",
-    Projects: "#projects",
-    Skills: "#projects",
-    Contact: "#contact",
+    About: "/#about",
+    Projects: "/#projects",
+    Services: "/#services",
+    Contact: "/#contact",
   } as const;
 
   return (
@@ -35,11 +35,13 @@ export default function Header() {
             )
           }>
             {(Object.keys(links) as Array<keyof typeof links>).map((link) => (
-              <Link
+              <ScrollToNavigator
                 key={link}
-                href={links[link]}
+                variant={"ghost"}
+                to={links[link]}
                 className={
                   clsx(
+                    "!p-0 !h-fit cursor-pointer !bg-transparent",
                     "navlinks text-lg md:text-sm font-medium text-white transition-colors duration-300 relative",
                     "before:w-0 before:absolute before:h-[2px] before:bg-gradient-to-r before:from-secondary before:to-primary",
                     "hover:before:w-full hover:before:absolute hover:before:bg-gradient-to-r hover:before:from-secondary hover:before:to-primary",
@@ -49,7 +51,7 @@ export default function Header() {
                 }
               >
                 {link}
-              </Link>
+              </ScrollToNavigator>
             ))}
            
           </nav>

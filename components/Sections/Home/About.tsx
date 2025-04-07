@@ -19,6 +19,7 @@ export default function AboutSection() {
 
   return (
     <motion.section
+    id="about"
       onViewportEnter={() => setShown(true)}
       className="w-full mx-auto rounded-t-4xl flex flex-col gap-5 h-fit bg-primary/30 backdrop-blur-3xl px-4 sm:px-10 lg:px-30 py-10"
       initial="offscreen"

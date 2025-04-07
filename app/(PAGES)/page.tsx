@@ -12,7 +12,7 @@ export default function Home() {
       <AboutSection />
       <Services />
       <Projects />
-      <div className="w-full py-10 px-4 sm:px-8">
+      <div id="contact" className="w-full py-10 px-4 sm:px-8">
         <h2 className="text-3xl font-bold text-center mb-6">Contact Us</h2>
 
         <div className="w-full flex sm:flex-row flex-col-reverse sm:items-center gap-4">

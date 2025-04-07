@@ -47,7 +47,7 @@ export default function Services() {
   const serviceChunks = chunkArray(servicesData, 2);
 
   return (
-    <section className="py-12 bg-background">
+    <section id="services" className="py-12 bg-background">
       <div className="container mx-auto px-4 flex flex-col gap-5 items-center">
         <div className="w-full text-center">
           <h2 className="text-3xl font-bold flex items-center justify-center gap-[2px] text-foreground">
