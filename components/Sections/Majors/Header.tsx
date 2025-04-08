@@ -37,8 +37,7 @@ export default function Header() {
             {(Object.keys(links) as Array<keyof typeof links>).map((link) => (
               <ScrollToNavigator
                 key={link}
-                variant={"ghost"}
-                to={links[link]}
+                href={links[link]}
                 className={
                   clsx(
                     "!p-0 !h-fit cursor-pointer !bg-transparent",
