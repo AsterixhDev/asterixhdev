@@ -49,14 +49,14 @@ export function SideBarMobile() {
   return (
     <Sidebar>
       <SidebarContent className="p-2">
-        <SidebarGroup className="bg-sidebar-accent rounded-lg">
-          <SidebarGroupLabel className="text-base">Portfolio</SidebarGroupLabel>
+        <SidebarGroup className="!bg-sidebar-accent !rounded-lg">
+          <SidebarGroupLabel className="!text-base">Portfolio</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {PortfolioNavigations.map((PortfolioNavigation) => (
                 <SidebarMenuItem key={PortfolioNavigation.title}>
                   <SidebarMenuButton asChild>
-                    <ScrollToNavigator className="!text-base hover:!bg-background !py-5" to={PortfolioNavigation.url}>
+                    <ScrollToNavigator className="!text-base !text-left !py-5" href={`${PortfolioNavigation.url}`} data-slot="scroll-to-navigator">
                       <i className={clsx(
                         "pi",
                         PortfolioNavigation.icon,

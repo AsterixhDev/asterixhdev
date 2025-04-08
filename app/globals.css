@@ -131,6 +131,9 @@
   --sidebar-border: #ffffff;
   --sidebar-ring: #9e7dff;
 }
+.noscrollbar::-webkit-scrollbar {
+  display: none;
+}
 
 @layer base {
   * {

@@ -1,9 +1,7 @@
-import React from 'react'
-import { Button } from '../ui/button'
+import Link from 'next/link';
+import React from 'react';
 
-type Props = React.ComponentPropsWithoutRef<typeof Button> & {
-    to:string;
-}
+type Props = React.ComponentPropsWithoutRef<typeof Link>
 
 export default function ScrollToNavigator({...props}: Props) {
     const scrollToSection = (sectionId: string) => {
@@ -14,11 +12,12 @@ export default function ScrollToNavigator({...props}: Props) {
         }
     }
   return (
-    <Button
-    data-slot="scroll-to-navigator"
+    <Link
     {...props}
+    href={`${props.href}`}
     onClick={(e)=>{
-        scrollToSection(props.to)
+        e.preventDefault()
+        scrollToSection(props.href as string)
         if (props.onClick) {
             props.onClick(e)
         }
