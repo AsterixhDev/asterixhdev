@@ -31,8 +31,13 @@ const PortfolioNavigations = [
 const BlogNavigations = [
   {
     title: "Blogs",
-    url: "/admin/projects",
+    url: "/admin/blogs",
     icon: "pi-comments", // Represents a personal/about section
+  },
+  {
+    title: "Files",
+    url: "/admin/files",
+    icon: "pi-file", // Suggests tools/settings typically used for services
   }
 ];
 export interface Navigation {
@@ -61,7 +66,7 @@ export function AdminSidebar({mobileTrigger}:{
     return <AdminMobileDrawer navigations={navigations} trigger={mobileTrigger}/>;
   }
 
-  return <aside className="min-w-fit shrink-0 flex flex-col gap-2 w-[15rem] bg-muted/20 backdrop-blur-lg rounded-2xl h-full min-h-screen p-2">
+  return <aside className="min-w-fit h-full custom-scrollbar overflow-y-auto shrink-0 flex flex-col gap-2 w-[15rem] bg-muted/20 backdrop-blur-lg rounded-2xl p-2">
     {
       Object.keys(navigations).map((key) => {
         const navigation = navigations[key];

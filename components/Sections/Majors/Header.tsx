@@ -19,7 +19,7 @@ export default function Header() {
   } as const;
 
   return (
-    <header className="sticky w-[95vw] sm:w-[90vw]  top-2 rounded-full mx-auto right-0 z-50 bg-black/60 backdrop-blur-lg border-b border-gray-800">
+    <header data-slot="main-header" className="sticky w-[95vw] sm:w-[90vw]  top-2 rounded-full mx-auto right-0 z-50 bg-black/60 backdrop-blur-lg border-b border-gray-800">
       <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
         {/* Logo / Brand Name */}
         <div className="text-base sm:text-2xl font-extrabold text-white tracking-wide">

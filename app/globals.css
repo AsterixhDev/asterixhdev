@@ -74,7 +74,7 @@
   --accent: #005368;
   --accent-foreground: #ffffff;
 
-  --destructive: #ff0000;
+  --destructive: var(--color-red-300);
   --border: #ffffff;
   --input: #ffffff;
   --ring: #9e7dff;
@@ -267,4 +267,42 @@
 100% {
     transform: rotate(calc(var(--angle)* 1deg + 1turn)) translateY(calc(var(--radius)* 1px)) rotate(calc(var(--angle)* -1deg - 1turn));
 }
+}
+
+
+
+/* Custom Scrollbar Styles */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: var(--muted) transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: var(--radius);
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--muted);
+  border-radius: var(--radius);
+  transition: background-color 0.2s ease-in-out;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+}
+
+/* Hide scrollbar but keep functionality */
+.scrollbar-hidden {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none;
 }

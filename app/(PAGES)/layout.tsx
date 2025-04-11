@@ -13,7 +13,7 @@ export default function layout({children}: Props) {
     <div className="size-full h-screen">
     <SideBarMobile/>
 
-    <main className='max-h-full relative isolate overflow-y-auto'>
+    <main data-slot="main-scroll-container" className='max-h-full relative isolate overflow-y-auto custom-scrollbar'>
     <Header/>
     {children}
     <Footer/>
