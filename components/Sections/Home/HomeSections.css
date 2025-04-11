@@ -4,19 +4,19 @@
   animation-play-state: paused;
 }
 
-.aboutWriteup:hover {
+.aboutWriteupActive {
   --tw-scale-x: 105%;
   --tw-scale-y: 105%;
   --tw-scale-z: 105%;
   scale: var(--tw-scale-x) var(--tw-scale-y);
 }
 
-.projectCard:hover::before,
-.projectCard:hover::after{
+.projectCardActive::before,
+.projectCardActive::after{
     opacity: 1;
 }
 
-.projectCard:hover .content{
+.projectCardActive .content{
     top: calc(var(--spacing)  * 10);
     border-top-left-radius: var(--radius-3xl) /* 1.5rem = 24px */;
     border-top-right-radius: var(--radius-3xl) /* 1.5rem = 24px */;

@@ -1,5 +1,6 @@
 "use client";
 
+import { sendEmail } from "@/app/actions/sendmail";
 import { VariantInteractiveButton } from "@/components/magicui/interactive-hover-button";
 import {
   Form,
@@ -10,29 +11,30 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { zodResolver } from "@hookform/resolvers/zod";
+import clsx from "clsx";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 type Props = object;
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const formSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
   email: z.string().email({ message: "Invalid email address." }),
   workName: z
     .string()
     .min(2, { message: "Work name must be at least 2 characters." }),
-  budget: z.preprocess(
-    (val) => (typeof val === "string" ? Number(val) : val) as number,
-    z.number().min(0, { message: "Budget must be a positive number." })
-  ),
+  budget: z.number()
+    .min(0, { message: "Budget must be a positive number." }),
   description: z
     .string()
     .min(10, { message: "Description must be at least 10 characters." }),
 });
 
 export default function ContactForm({}: Props) {
+  const [status, setStatus] = useState<"sending"|"sent"|"error"|"not-sending">("not-sending")
   const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
       email: "",
@@ -42,8 +44,24 @@ export default function ContactForm({}: Props) {
     },
   });
 
+  const runSubmit = async(values: z.infer<typeof formSchema>)=>{
+    try {
+      setStatus("sending")
+      await sendEmail(values)
+      setStatus("sent")
+      setTimeout(() => {
+        setStatus("not-sending")
+      }, 1000);
+
+      form.reset()
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (error) {
+      setStatus("error")
+    }
+  } 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log("Form submitted:", values);
+    runSubmit(values)
+     
   }
 
   return (
@@ -131,8 +149,8 @@ export default function ContactForm({}: Props) {
                 name="budget"
                 render={({ field }) => (
                   <FormItem className="w-full">
-                    <FormLabel>Budget</FormLabel>
-                    <div className="w-full relative">
+                    <FormLabel>Budget (in dollar: <strong className="text-secondary">$</strong>)</FormLabel>
+                    <div className="w-full relative !h-fit">
                       <span className="absolute inset-y-0 left-1 flex items-center pl-3 text-muted-foreground">
                         <i className="pi pi-money-bill"></i>
                       </span>
@@ -180,8 +198,20 @@ export default function ContactForm({}: Props) {
               <VariantInteractiveButton
                 secondaryHoverContent={
                   <span className="flex items-center gap-2">
-                    Submit
-                    <i className="pi pi-send"></i>
+                    {status === "sending"?"Sending":status==="sent"?"Sent":"Send Message"}
+                    <i className={
+                      clsx(
+                        "pi translate-y-0 translate-x-0",
+                        {
+                          "pi-spinner-dotted pi-spinner-dotted animate-[spin_2s_linear_infinite]":status === "sending",
+                          "pi-send":status === "not-sending"||status === "sent",
+                          "pi-spinner":status === "error",
+                        },
+                        status === "sent"&&(
+                          "-translate-y-5 translate-x-5"
+                        )
+                      )
+                    }></i>
                   </span>
                 }
                 otherClasses={{
@@ -191,7 +221,8 @@ export default function ContactForm({}: Props) {
                 variant="secondary"
                 className="w-fit px-10"
               >
-                Submit
+                {status === "sending"?"Sending":status==="sent"?"Sent":"Send Message"}
+               
               </VariantInteractiveButton>
             </div>
           </form>
