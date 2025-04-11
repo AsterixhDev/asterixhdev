@@ -8,13 +8,8 @@ type Props = React.ComponentPropsWithoutRef<typeof Link>;
 export default function ScrollToNavigator({ ...props }: Props) {
   const router = useRouter();
   const path = usePathname();
-  const [located, setLocated] = useState<{
-    sectionId?: string;
-    locatedPath: string;
-  }>({
-    sectionId: undefined,
-    locatedPath: "/",
-  });
+  const [isRouting, setIsRouting] = useState(false);
+  const [targetSection, setTargetSection] = useState<string | undefined>();
 
   const handlePosition = (sectionId: string) => {
     sectionId = sectionId.replace(/\/#/g, "");
@@ -26,24 +21,20 @@ export default function ScrollToNavigator({ ...props }: Props) {
         "[data-slot='main-scroll-container']"
       )) as HTMLElement;
 
-    // Get the header's height using the data attribute
     const headerHeight =
       document.querySelector("[data-slot='main-header']")?.clientHeight || 0;
+
     const calculatePosition = () => {
       if (element && scrollContainer) {
         const elementRect = element.getBoundingClientRect();
         const containerRect = scrollContainer.getBoundingClientRect();
-        // Calculate the element's offset from the container's top
         const offset = elementRect.top - containerRect.top;
-        // Determine the new scroll position
         const targetScroll = scrollContainer.scrollTop + offset - headerHeight;
-        const calculatedPosition = (targetScroll < 0 ? 0 : targetScroll) - 10;
-
-        return calculatedPosition;
+        return (targetScroll < 0 ? 0 : targetScroll) - 10;
       }
-
       return 0;
     };
+
     if (element && scrollContainer) {
       setTimeout(() => {
         scrollContainer.style.transitionDuration = "1s";
@@ -51,37 +42,56 @@ export default function ScrollToNavigator({ ...props }: Props) {
           top: calculatePosition(),
           behavior: "smooth",
         });
-      }, 10);
+      }, 100); // Increased delay for better reliability
     }
   };
+
   useEffect(() => {
-    if (path === located.locatedPath) {
-      console.log("locating");
-      handlePosition(`${located.sectionId}`);
-    } else {
-      console.log("routing");
-      router.push(located.locatedPath);
+    // Handle positioning after route change and page load
+    if (isRouting && targetSection) {
+      const handleRouteComplete = () => {
+        handlePosition(targetSection);
+        setIsRouting(false);
+        setTargetSection(undefined);
+      };
+
+      // Wait for page content to load
+      if (document.readyState === 'complete') {
+        handleRouteComplete();
+      } else {
+        window.addEventListener('load', handleRouteComplete);
+        return () => window.removeEventListener('load', handleRouteComplete);
+      }
     }
-  }, [located.locatedPath, located.sectionId, path, router]);
+  }, [isRouting, targetSection, path]);
+
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    
+    const hrefSplit = props.href.toString().split("#");
+    const [routePath, section] = hrefSplit;
+    
+    setTargetSection(section);
+
+    if (path === routePath) {
+      // Same page, just scroll
+      handlePosition(section);
+    } else {
+      // Different page, set routing flag and navigate
+      setIsRouting(true);
+      router.push(props.href.toString());
+    }
+
+    if (props.onClick) {
+      props.onClick(e);
+    }
+  };
 
   return (
     <Link
       {...props}
-      href={`${props.href}`}
-      onClick={async (e) => {
-        e.preventDefault();
-        const hrefSplit = `${props.href}`.split("#");
-        const goTo = hrefSplit[0];
-        setLocated({
-          locatedPath: goTo,
-          sectionId: hrefSplit.at(-1),
-        });
-
-        handlePosition(props.href.toString());
-        if (props.onClick) {
-          props.onClick(e);
-        }
-      }}
+      href={props.href}
+      onClick={handleClick}
     />
   );
 }
