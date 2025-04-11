@@ -6,7 +6,7 @@ type data = {
     name: string;
     email: string;
     workName: string;
-    budget: number;
+    budget: string;
     description: string;
     to?:string
 }

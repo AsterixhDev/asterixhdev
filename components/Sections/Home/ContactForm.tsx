@@ -24,7 +24,7 @@ const formSchema = z.object({
   workName: z
     .string()
     .min(2, { message: "Work name must be at least 2 characters." }),
-  budget: z.number()
+  budget: z.string()
     .min(0, { message: "Budget must be a positive number." }),
   description: z
     .string()
@@ -39,7 +39,7 @@ export default function ContactForm({}: Props) {
       name: "",
       email: "",
       workName: "",
-      budget: 0,
+      budget: "0",
       description: "",
     },
   });
