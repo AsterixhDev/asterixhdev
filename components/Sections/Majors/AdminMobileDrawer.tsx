@@ -20,9 +20,10 @@ export function AdminMobileDrawer({
   trigger?: React.ReactNode;
   navigations: Record<string, Navigation[]>;
 }) {
+  const [open, setOpen] = React.useState(false)
   return (
-    <Drawer>
-      <DrawerTrigger asChild>{trigger}</DrawerTrigger>
+    <Drawer open={open} onClose={()=>setOpen(false)}>
+      <DrawerTrigger onClick={()=>setOpen(true)} asChild>{trigger}</DrawerTrigger>
       <DrawerContent>
         <div className="mx-auto w-full">
           <DrawerTitle>
@@ -46,6 +47,9 @@ export function AdminMobileDrawer({
                       <Link
                         href={PortfolioNavigation.url}
                         key={PortfolioNavigation.title}
+                        onClick={()=>{
+                          setOpen(false)
+                        }}
                         className="flex items-center gap-2 py-2 px-4 rounded-lg hover:bg-muted/50 transition-colors duration-200"
                       >
                         <i
