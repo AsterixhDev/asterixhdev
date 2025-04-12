@@ -5,7 +5,6 @@ export interface Section {
   description?: string;
   type: SectionType;
   items?: string[];
-  content?: string;
 }
 export interface Project {
   _id: string;

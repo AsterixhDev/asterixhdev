@@ -28,7 +28,7 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { PencilIcon, X } from "lucide-react";
@@ -55,6 +55,7 @@ export function SectionEditorModal({
 }: SectionEditorProps) {
   const [open, setOpen] = useState(false);
   const [items, setItems] = useState<string[]>([]);
+  const [once, setOnce] = useState(false)
   const [currentItem, setCurrentItem] = useState("");
 
   const form = useForm<SectionFormValues>({
@@ -63,12 +64,33 @@ export function SectionEditorModal({
       title: "",
       description: "",
       type: "text",
-      items: section.items || [],
+      items: [],
     },
   });
 
+  useEffect(() => {
+    if(open){
+      if(!once){
+        (Object.keys(section) as (keyof Section)[]).forEach((key) => {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          form.setValue(key as any, section[key]);
+        });
+        const values = form.getValues("items")
+        setItems([...values || []]);
+        setOnce(true)
+      }
+    }else{
+      setOnce(false)
+    }
+  }, [section, form, open, currentItem, once])
+
+
+  
+  
+
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter" && currentItem.trim()) {
+      console.log("enter")
       e.preventDefault();
       setItems([...items, currentItem.trim()]);
       setCurrentItem("");
