@@ -9,16 +9,17 @@ type Props = {
 export async function generateMetadata({
   params,
 }: {
-  params: { title: string };
+  params: Promise<{ title: string }>;
 }): Promise<Metadata> {
-  const project = await fetchProject(params.title); // Implement this function
+  const slugs = await(params)
+  const project = await fetchProject(slugs.title); // Implement this function
   if (!project) {
     return {
-      title: `${params.title} - AsterixhDev Portfolio`,
-      description: "No project found with the name " + params.title,
+      title: `${slugs.title} - AsterixhDev Portfolio`,
+      description: "No project found with the name " + slugs.title,
       openGraph: {
-        title: `${params.title} - AsterixhDev Portfolio`,
-        description: "No project found with the name " + params.title,
+        title: `${slugs.title} - AsterixhDev Portfolio`,
+        description: "No project found with the name " + slugs.title,
         images: "/images/my-image.jpg",
       },
     };

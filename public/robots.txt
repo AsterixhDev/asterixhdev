@@ -1,4 +1,10 @@
+# *
 User-agent: *
 Allow: /
 
+# Host
+Host: https://asterixhdev.vercel.app
+
+# Sitemaps
 Sitemap: https://asterixhdev.vercel.app/sitemap.xml
+Sitemap: https://asterixhdev.vercel.app/server-sitemap.xml
