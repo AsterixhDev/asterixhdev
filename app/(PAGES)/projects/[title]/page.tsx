@@ -31,16 +31,19 @@ export default function ProjectPage({
 }) {
   const [project, setProject] = useState<Project | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  
   const [preview, setPreview] = useState({
     show:false,
     url:undefined as undefined|string
   });
   const slugs = use(params);
+  const title = decodeURIComponent(slugs.title)
+
 
   useEffect(() => {
     const fetchProject = async () => {
       try {
-        const response = await fetch(`/api/portfolio/projects/${slugs.title}`);
+        const response = await fetch(`/api/portfolio/projects/${title}`);
         if (!response.ok) throw new Error("Failed to fetch project");
         const data = await response.json();
         setProject(data[0]);
@@ -52,14 +55,14 @@ export default function ProjectPage({
     };
 
     fetchProject();
-  }, [slugs.title]);
+  }, [title]);
 
   if (isLoading) {
-    return <Loader what={`${slugs.title} Project`}/>;
+    return <Loader what={`${title} Project`}/>;
   }
 
   if (!project) {
-    return <NotFoundComponent what={`${slugs.title} Project`}/>;
+    return <NotFoundComponent what={`${title} Project`}/>;
   }
 
   return (
@@ -108,7 +111,7 @@ export default function ProjectPage({
             <Card key={index} className="bg-background/50">
               <CardHeader>
                 <CardTitle>{section.title}</CardTitle>
-                {section.description && (
+                {section.type === "list"&&section.description && (
                   <CardDescription>{section.description}</CardDescription>
                 )}
               </CardHeader>
@@ -123,7 +126,7 @@ export default function ProjectPage({
                   </ul>
                 )}
                 {section.type === "text" && section.description && (
-                  <p className="text-muted-foreground">{section.description}</p>
+                  <pre className="text-muted-foreground">{section.description}</pre>
                 )}
               </CardContent>
             </Card>
