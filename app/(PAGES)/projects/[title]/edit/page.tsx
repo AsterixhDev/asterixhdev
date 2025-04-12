@@ -30,14 +30,14 @@ import {
 } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
 import { Textarea } from "@/components/ui/textarea";
-import { Project, ProjectFormSchema, Section } from "@/lib/types";
+import { Project, Section } from "@/lib/types";
+import { ProjectFormSchema } from "@/lib/types/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Trash2Icon, X } from "lucide-react"; // Add this import
 import { useRouter } from "next/navigation";
 import { use, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-
 
 
 

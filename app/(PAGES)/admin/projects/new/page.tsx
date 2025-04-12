@@ -25,7 +25,8 @@ import {
 } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
 import { Textarea } from "@/components/ui/textarea";
-import { ProjectFormSchema, Section } from "@/lib/types";
+import { Section } from "@/lib/types";
+import { ProjectFormSchema } from "@/lib/types/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Trash2Icon, X } from "lucide-react"; // Add this import
 import { useState } from "react";
