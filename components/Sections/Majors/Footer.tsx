@@ -67,24 +67,27 @@ export default function Footer() {
           <div>
             <h3 className="text-xl font-bold">Follow Us</h3>
             <div className="mt-2 flex space-x-4">
-              <Link
-                href="#"
+              <a
+                href="https://x.com/AsterixhThanks?t=URfI8qwSIK1SbDijca99BA&s=09"
                 className="hover:text-primary transition-colors duration-300"
               >
                 <i className="pi pi-twitter"></i>
-              </Link>
-              <Link
-                href="#"
+              </a>
+              <a
+                href="https://www.instagram.com/code_with_asterixh"
                 className="hover:text-primary transition-colors duration-300"
               >
                 <i className="pi pi-instagram"></i>
-              </Link>
-              <Link
-                href="#"
+              </a>
+              <a
+                href="https://www.linkedin.com/in/paul-peter-eyinnaya?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
                 className="hover:text-primary transition-colors duration-300"
               >
                 <i className="pi pi-linkedin"></i>
-              </Link>
+              </a>
+              <a href="https://www.github.com/CodeWithAsterixh">
+              <i className="pi pi-github"></i>
+              </a>
             </div>
           </div>
         </div>

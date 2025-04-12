@@ -10,6 +10,7 @@ import SkillsFull from "./SkillsFull";
 
 export default function AboutSection() {
   const [shown, setShown] = useState(false);
+  const [shownOnce, setShownOnce] = useState(false);
   const [shownFullSkill, setShownFullSkill] = useState(false);
 
 
@@ -20,10 +21,17 @@ export default function AboutSection() {
   return (
     <motion.section
     id="about"
-      onViewportEnter={() => setShown(true)}
-      className="w-full mx-auto rounded-t-4xl flex flex-col gap-5 h-fit bg-primary/30 backdrop-blur-3xl px-4 sm:px-10 lg:px-30 py-10"
+      onViewportEnter={() =>{
+        setShown(true)
+        setShownOnce(true)
+      }}
+      onViewportLeave={() => setShown(false)}
+      className="w-full mx-auto overflow-hidden rounded-t-4xl flex flex-col gap-5 h-fit bg-primary/30 backdrop-blur-3xl px-4 sm:px-10 lg:px-30 py-10"
       initial="offscreen"
       whileInView="onscreen"
+      viewport={{
+        amount: 0.2
+      }}
       
     >
       <h1
@@ -38,26 +46,41 @@ export default function AboutSection() {
         <motion.div
           className={clsx(
             "bg-secondary/20 bg-conic grid grid-cols-1 backdrop-blur-lg h-fit min-h-full rounded-lg shadow-md",
-            "before:absolute after:absolute",
-            "before:size-full after:size-full",
-            "before:left-1/2 after:left-1/2",
-            "before:top-1/2 after:top-1/2",
-            "before:-translate-1/2 after:-translate-1/2",
-            "before:-z-10 after:-z-10",
-            "before:p-1 after:p-1",
-            "before:blur-3xl",
-            "before:animate-conic",
-            "after:animate-conic",
-            "animatedTerminal",
-            "before:rounded-md after:rounded-xl",
-            "before:box-content after:box-content"
+            // "before:absolute after:absolute",
+            // "before:size-full after:size-full",
+            // "before:left-1/2 after:left-1/2",
+            // "before:top-1/2 after:top-1/2",
+            // "before:-translate-1/2 after:-translate-1/2",
+            // "before:-z-10 after:-z-10",
+            // "before:p-1 after:p-1",
+            // "before:blur-3xl",
+            // "before:animate-conic",
+            // "after:animate-conic",
+            // "animatedTerminal",
+            // "before:rounded-md after:rounded-xl",
+            // "before:box-content after:box-content"
+            "duration-300",
+            shown?(
+              "translate-x-0 scale-100 opacity-100"
+            ):(
+              "-translate-x-64 scale-50 opacity-0"
+            )
           )}
         >
           {shownFullSkill?<SkillsFull handleskillClick={handleSkillClick}/>: (
-            <SkillTerminal shown={shown} handleskillClick={handleSkillClick} />
+            <SkillTerminal shown={shownOnce} handleskillClick={handleSkillClick} />
           )}
         </motion.div>
-        <div className="bg-secondary/20 backdrop-blur-lg p-6 rounded-xl shadow-xl transform aboutWriteup transition duration-300">
+        <div className={
+          clsx(
+            "bg-secondary/20 backdrop-blur-lg p-6 rounded-xl shadow-xl transform aboutWriteup transition duration-300",
+            shown?(
+              "translate-x-0 scale-100 opacity-100"
+            ):(
+              "translate-x-64 scale-50 opacity-0"
+            )
+          )
+        }>
           <motion.div>
             <h1 className="text-2xl font-bold text-white mb-4">
               The true Asterixh

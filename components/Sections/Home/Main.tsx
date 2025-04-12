@@ -60,13 +60,26 @@ export default function Main() {
           </span>
           <ul className="socialLinks">
             <li>
+              <a href="https://www.github.com/CodeWithAsterixh">
               <i className="pi pi-github"></i>
+              </a>
+              
             </li>
             <li>
-              <i className="pi pi-twitter"></i>
+            <a href="https://x.com/AsterixhThanks?t=URfI8qwSIK1SbDijca99BA&s=09">
+            <i className="pi pi-twitter"></i>
+            </a>
             </li>
             <li>
-              <i className="pi pi-linkedin"></i>
+            <a href="https://www.instagram.com/code_with_asterixh">
+            <i className="pi pi-instagram"></i>
+            </a>
+            </li>
+            
+            <li>
+            <a href="https://www.linkedin.com/in/paul-peter-eyinnaya?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app">
+            <i className="pi pi-linkedin"></i>
+            </a>
             </li>
           </ul>
         </div>
