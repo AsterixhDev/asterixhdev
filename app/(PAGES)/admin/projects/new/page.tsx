@@ -237,7 +237,7 @@ export default function NewProjectPage() {
                               }))
                             );
                           }}
-                          maxImages={5}
+                          maxImages={10}
                           className="bg-background/50 backdrop-blur-sm"
                         />
                       </div>

@@ -161,6 +161,7 @@ export default function EditProjectPage({
         form.setValue("liveUrl",project.liveUrl)
         form.setValue("technologies",project.technologies)
         form.setValue("title",project.title)
+        setSections(project.sections)
         setImagesUrl(project.projectImages)
     }
   }, [form, project])
@@ -198,7 +199,6 @@ export default function EditProjectPage({
     };
     try {
       // Add your API call here
-      console.log(projectData);
       const response = await fetch(`/api/portfolio/projects/${slugs.title}`, {
         method: "PUT",
         headers: {
@@ -315,7 +315,7 @@ export default function EditProjectPage({
                               }))
                             );
                           }}
-                          maxImages={5}
+                          maxImages={10}
                           className="bg-background/50 backdrop-blur-sm"
                         />
                       </div>
