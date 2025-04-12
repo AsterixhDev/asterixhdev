@@ -2,6 +2,7 @@
 
 import Loader from "@/components/Loader";
 import { RippleButton } from "@/components/magicui/ripple-button";
+import NotFoundComponent from "@/components/Notfound";
 import { ImagePreviewModal } from "@/components/Sections/Admin/portfolio/imagePreviewModal";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -58,7 +59,7 @@ export default function ProjectPage({
   }
 
   if (!project) {
-    return <div>Project not found</div>;
+    return <NotFoundComponent what={`${slugs.title} Project`}/>;
   }
 
   return (

@@ -3,6 +3,22 @@ import { GridFSBucket } from "mongodb";
 import mongoose from "mongoose";
 import { NextRequest, NextResponse } from "next/server";
 
+export interface FileMetadata {
+  _id: string;
+  length: number;
+  chunkSize: number;
+  uploadDate: string;
+  filename: string;
+  contentType: string;
+  metadata: {
+    group: string;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    [key: string]: any; // For additional metadata fields
+  };
+  url: string;
+  size: number;
+  mimetype: string;
+}
 // GET - Retrieve/Download file
 export async function GET(
   request: NextRequest,
@@ -10,6 +26,8 @@ export async function GET(
 {
   try {
     await connectToDatabase("files");
+    const url = new URL(request.url);
+    const collectAs = (url.searchParams.get('as') || 'file') as "file"|"data";
     const db = mongoose.connection.db;
     if (!db) {
       throw new Error("Database connection not established");
@@ -25,6 +43,16 @@ export async function GET(
     }
 
     const file = files[0];
+    if(collectAs === "data"){
+      return new NextResponse(JSON.stringify({
+        ...file,
+        url: `/storage/files/${slugs.bucketname}/${file.filename}`,
+      }), {
+        status: 200,
+        statusText:"file available"
+      })
+    }
+    
     const stream = bucket.openDownloadStream(file._id);
 
     const chunks: Buffer[] = [];

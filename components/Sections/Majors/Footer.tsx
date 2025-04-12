@@ -61,42 +61,12 @@ export default function Footer() {
                   Blog
                 </Link>
               </li>
-              <li>
-                <Link
-                  href="#"
-                  className="hover:text-primary transition-colors duration-300"
-                >
-                  FAQ
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="#"
-                  className="hover:text-primary transition-colors duration-300"
-                >
-                  Privacy Policy
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="#"
-                  className="hover:text-primary transition-colors duration-300"
-                >
-                  Terms of Service
-                </Link>
-              </li>
             </ul>
           </div>
           {/* Social Media */}
           <div>
             <h3 className="text-xl font-bold">Follow Us</h3>
             <div className="mt-2 flex space-x-4">
-              <Link
-                href="#"
-                className="hover:text-primary transition-colors duration-300"
-              >
-                <i className="pi pi-facebook"></i>
-              </Link>
               <Link
                 href="#"
                 className="hover:text-primary transition-colors duration-300"
