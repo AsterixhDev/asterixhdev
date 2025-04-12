@@ -44,13 +44,17 @@ const chunkArray = (arr: Service[], chunkSize: number): Service[][] => {
   return chunks;
 };
 
-export default function Services() {
-  const serviceChunks = chunkArray(servicesData, 2);
+const ServiceCard = ({
+  service,
+  index,
+}: {
+  service: Service;
+  index: number;
+}) => {
   const [shown, setShown] = useState(false);
 
   return (
-    <motion.section
-      id="services"
+    <motion.div
       onViewportEnter={() => {
         setShown(true);
       }}
@@ -58,26 +62,65 @@ export default function Services() {
       initial="offscreen"
       whileInView="onscreen"
       viewport={{
-        amount: 0.2,
+        amount: 0.5,
       }}
-      className="py-12 bg-background"
+      className={clsx(
+        "flex flex-col gap-2 p-6 rounded-lg h-full w-full bg-primary/5 bg-clip-padding backdrop-filter backdrop-blur-sm border border-gray-100 duration-500",
+        shown
+          ? "translate-x-0 scale-100 opacity-100"
+          : {
+              "scale-50 opacity-0": true,
+              "-translate-x-52": index == 0,
+              "last:translate-x-52 delay-300": index == 1,
+            }
+      )}
     >
+      {/* Index/Number Column */}
+      <div className="w-full">
+        <span className="text-2xl font-extrabold text-primary">
+          {service.id < 10 ? `0${service.id}` : service.id}
+        </span>
+      </div>
+      {/* Service Details Column */}
+      <div className="w-full">
+        <h3 className="text-lg font-semibold text-foreground mb-2">
+          {service.name}
+        </h3>
+        <p className="text-base text-muted-foreground">{service.description}</p>
+      </div>
+    </motion.div>
+  );
+};
+export default function Services() {
+  const serviceChunks = chunkArray(servicesData, 2);
+  const [shown, setShown] = useState(false);
+
+  return (
+    <section id="services" className="py-12 bg-background overflow-hidden">
       <div className="container mx-auto px-4 flex flex-col gap-5 items-center">
-        <div className="w-full text-center">
+        <motion.div
+          onViewportEnter={() => {
+            setShown(true);
+          }}
+          onViewportLeave={() => setShown(false)}
+          initial="offscreen"
+          whileInView="onscreen"
+          viewport={{
+            amount: 0.2,
+          }}
+          className="w-full text-center"
+        >
           <h2 className="text-3xl font-bold flex items-center justify-center gap-[2px] text-foreground">
             {"Our Services".split("").map((char, index) => (
               <span
                 key={index}
                 style={{
-                  transitionDelay: `${index*50}ms`
+                  transitionDelay: `${index * 50}ms`,
                 }}
-                className={clsx(
-                  "transition-transform duration-300",
-                  {
-                    "-translate-y-2 -rotate-12 opacity-55":!shown,
-                    "translate-y-0 rotate-0 opacity-100":shown,
-                  }
-                )}
+                className={clsx("transition-transform duration-300", {
+                  "-translate-y-2 -rotate-12 opacity-55": !shown,
+                  "translate-y-0 rotate-0 opacity-100": shown,
+                })}
               >
                 {char}
                 {char === " " && <>&nbsp;</>}
@@ -95,7 +138,7 @@ export default function Services() {
               together!
             </p>
           </div>
-        </div>
+        </motion.div>
         <div className="flex flex-col gap-4">
           {serviceChunks.map((chunk, chunkIndex) => (
             <div
@@ -107,41 +150,13 @@ export default function Services() {
                   : "md:grid-cols-[2fr_4fr]"
               }`}
             >
-              {chunk.map((service) => (
-                <div
-                  key={service.id}
-                  className={
-                    clsx(
-                      "flex flex-col gap-2 p-6 rounded-lg h-full w-full bg-primary/5 bg-clip-padding backdrop-filter backdrop-blur-sm border border-gray-100 duration-300",
-                      shown?(
-                        "translate-x-0 scale-100 opacity-100"
-                      ):(
-                        "scale-50 opacity-0 last:translate-x-64 first:-translate-x-64"
-                      )
-                    )
-                  }
-                >
-                  {/* Index/Number Column */}
-                  <div className="w-full">
-                    <span className="text-2xl font-extrabold text-primary">
-                      {service.id < 10 ? `0${service.id}` : service.id}
-                    </span>
-                  </div>
-                  {/* Service Details Column */}
-                  <div className="w-full">
-                    <h3 className="text-lg font-semibold text-foreground mb-2">
-                      {service.name}
-                    </h3>
-                    <p className="text-base text-muted-foreground">
-                      {service.description}
-                    </p>
-                  </div>
-                </div>
+              {chunk.map((service, index) => (
+                <ServiceCard index={index} service={service} key={service.id} />
               ))}
             </div>
           ))}
         </div>
       </div>
-    </motion.section>
+    </section>
   );
 }
