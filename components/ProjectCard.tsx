@@ -12,9 +12,10 @@ type Props = {
   className?: string;
   project?: Project;
   index?: number;
+  showEdit?:boolean
 };
 
-export default function ProjectCard({ className, project, index }: Props) {
+export default function ProjectCard({ className, project, index,showEdit=false }: Props) {
   const [focused, setFocused] = useState(false);
   const cardRef = useRef<HTMLLIElement>(null);
 
@@ -76,11 +77,21 @@ export default function ProjectCard({ className, project, index }: Props) {
               <h3 className="text-lg h-10 flex items-center font-bold">
                 {project?.title ? project?.title : "Project name"}
               </h3>
+              <div className="w-fit flex items-center gap-2">
+              
+                {
+                  showEdit&&<Link href={`/projects/${project?.title}/edit`}>
+                  <RippleButton variant="secondary" className="!rounded-full shrink-0 bg-primary/40 border-none !size-10 *:!p-0 *:flex *:items-center *:justify-center">
+                    <i className="pi pi-pi-pencil text-primary-foreground size-full block"></i>
+                  </RippleButton>
+                </Link>
+                }
               <Link href={`${project?.githubUrl}`}>
                 <RippleButton className="!rounded-full shrink-0 bg-primary/40 border-none !size-10 *:!p-0 *:flex *:items-center *:justify-center">
                   <i className="pi pi-github text-primary-foreground size-full block"></i>
                 </RippleButton>
               </Link>
+              </div>
             </div>
             <p className="line-clamp-6">
               {project?.description

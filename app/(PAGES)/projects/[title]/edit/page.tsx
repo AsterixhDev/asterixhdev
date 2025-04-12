@@ -47,6 +47,7 @@ export default function EditProjectPage({
   params: Promise<{ title: string }>;
 }) {
   const slugs = use(params);
+  const title = decodeURIComponent(slugs.title)
   const [project, setProject] = useState<Project | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -59,7 +60,7 @@ export default function EditProjectPage({
   useEffect(() => {
     const fetchProject = async () => {
       try {
-        const response = await fetch(`/api/portfolio/projects/${slugs.title}`);
+        const response = await fetch(`/api/portfolio/projects/${title}`);
         if (!response.ok) throw new Error("Failed to fetch project");
         const data = await response.json();
         setProject(data[0]);
@@ -71,7 +72,7 @@ export default function EditProjectPage({
       }
     };
     fetchProject();
-  }, [slugs.title]);
+  }, [title]);
   
     useEffect(() => {
       const fetchImages = async (url:string) => {
@@ -188,11 +189,11 @@ export default function EditProjectPage({
   };
 
   if (isLoading) {
-    return <Loader what={`${slugs.title} Project`} />;
+    return <Loader what={`${title} Project`} />;
   }
 
   if (!project) {
-    return <NotFoundComponent what={`${slugs.title} Project`}/>;
+    return <NotFoundComponent what={`${title} Project`}/>;
   }
 
   return (
