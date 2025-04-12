@@ -71,7 +71,7 @@ const ServiceCard = ({
           : {
               "scale-50 opacity-0": true,
               "-translate-x-24 sm:last:-translate-x-52": index == 0,
-              "translate-x-24 sm:last:translate-x-52 delay-300": index == 1,
+              "translate-x-24 sm:last:translate-x-52 sm:delay-300": index == 1,
             }
       )}
     >
