@@ -1,14 +1,15 @@
 "use client"
 
 import {
-    Sidebar,
-    SidebarContent,
-    SidebarGroup,
-    SidebarGroupContent,
-    SidebarGroupLabel,
-    SidebarMenu,
-    SidebarMenuButton,
-    SidebarMenuItem,
+  Sidebar,
+  SidebarContent,
+  SidebarGroup,
+  SidebarGroupContent,
+  SidebarGroupLabel,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+  useSidebar,
 } from "@/components/ui/sidebar";
 import { useIsMobile } from "@/lib/hooks/useMobile";
 import clsx from "clsx";
@@ -41,7 +42,10 @@ const PortfolioNavigations = [
 
 export function SideBarMobile() {
   const isMobile = useIsMobile(768)
+  const { setOpenMobile } = useSidebar();
 
+
+  
     if (!isMobile) {
         return null
     }
@@ -56,7 +60,11 @@ export function SideBarMobile() {
               {PortfolioNavigations.map((PortfolioNavigation) => (
                 <SidebarMenuItem key={PortfolioNavigation.title}>
                   <SidebarMenuButton asChild>
-                    <ScrollToNavigator className="!text-base !text-left !py-5" href={`${PortfolioNavigation.url}`} data-slot="scroll-to-navigator">
+                    <ScrollToNavigator
+                      onClick={()=>{
+                        setOpenMobile(false)
+                      }}
+                    className="!text-base !text-left !py-5" href={`${PortfolioNavigation.url}`} data-slot="scroll-to-navigator">
                       <i className={clsx(
                         "pi",
                         PortfolioNavigation.icon,
