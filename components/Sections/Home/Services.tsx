@@ -1,4 +1,7 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
+import * as motion from "motion/react-client";
+import clsx from "clsx";
 
 type Service = {
   id: number;
@@ -30,10 +33,8 @@ const servicesData: Service[] = [
     name: "Performance Optimization",
     description:
       "Enhancing application speed and scalability through code optimization, advanced caching strategies, and modern performance best practices.",
-  }
-]
-;
-
+  },
+];
 // Helper function to split an array into chunks of a specified size.
 const chunkArray = (arr: Service[], chunkSize: number): Service[][] => {
   const chunks: Service[][] = [];
@@ -45,19 +46,41 @@ const chunkArray = (arr: Service[], chunkSize: number): Service[][] => {
 
 export default function Services() {
   const serviceChunks = chunkArray(servicesData, 2);
+  const [shown, setShown] = useState(false);
 
   return (
-    <section id="services" className="py-12 bg-background">
+    <motion.section
+      id="services"
+      onViewportEnter={() => {
+        setShown(true);
+      }}
+      onViewportLeave={() => setShown(false)}
+      initial="offscreen"
+      whileInView="onscreen"
+      viewport={{
+        amount: 0.2,
+      }}
+      className="py-12 bg-background"
+    >
       <div className="container mx-auto px-4 flex flex-col gap-5 items-center">
         <div className="w-full text-center">
           <h2 className="text-3xl font-bold flex items-center justify-center gap-[2px] text-foreground">
             {"Our Services".split("").map((char, index) => (
               <span
                 key={index}
-                className={`transition-transform duration-300 hover:-translate-y-2 hover:-rotate-12`}
+                style={{
+                  transitionDelay: `${index*50}ms`
+                }}
+                className={clsx(
+                  "transition-transform duration-300",
+                  {
+                    "-translate-y-2 -rotate-12 opacity-55":!shown,
+                    "translate-y-0 rotate-0 opacity-100":shown,
+                  }
+                )}
               >
                 {char}
-                {char===" " && <>&nbsp;</>}
+                {char === " " && <>&nbsp;</>}
               </span>
             ))}
           </h2>
@@ -87,7 +110,16 @@ export default function Services() {
               {chunk.map((service) => (
                 <div
                   key={service.id}
-                  className="flex flex-col gap-2 p-6 rounded-lg h-full w-full bg-primary/5 bg-clip-padding backdrop-filter backdrop-blur-sm border border-gray-100"
+                  className={
+                    clsx(
+                      "flex flex-col gap-2 p-6 rounded-lg h-full w-full bg-primary/5 bg-clip-padding backdrop-filter backdrop-blur-sm border border-gray-100 duration-300",
+                      shown?(
+                        "translate-x-0 scale-100 opacity-100"
+                      ):(
+                        "scale-50 opacity-0 last:translate-x-64 first:-translate-x-64"
+                      )
+                    )
+                  }
                 >
                   {/* Index/Number Column */}
                   <div className="w-full">
@@ -110,6 +142,6 @@ export default function Services() {
           ))}
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }
