@@ -12,24 +12,25 @@ export async function generateMetadata({
   params: Promise<{ title: string }>;
 }): Promise<Metadata> {
   const slugs = await(params)
-  const project = await fetchProject(slugs.title); // Implement this function
+  const title = decodeURIComponent(slugs.title)
+  const project = await fetchProject(title); // Implement this function
   if (!project) {
     return {
-      title: `${slugs.title} - AsterixhDev Portfolio`,
-      description: "No project found with the name " + slugs.title,
+      title: `${title} - AsterixhDev Portfolio`,
+      description: "No project found with the name " + title,
       openGraph: {
-        title: `${slugs.title} - AsterixhDev Portfolio`,
-        description: "No project found with the name " + slugs.title,
+        title: `${title} - AsterixhDev Portfolio`,
+        description: "No project found with the name " + title,
         images: "/images/my-image.jpg",
       },
     };
   }
 
   return {
-    title: `${project.title} - AsterixhDev Portfolio`,
+    title: `${title} - AsterixhDev Portfolio`,
     description: project.description,
     openGraph: {
-      title: `${project.title} - AsterixhDev Portfolio`,
+      title: `${title} - AsterixhDev Portfolio`,
       description: project.description,
       images: project.projectImages,
     },
