@@ -42,7 +42,7 @@ export type ProjectFormValues = {
   liveUrl?: string | undefined;
 };
 
-const formSchema = z.object({
+export const formSchema = z.object({
   category: z.enum(["best", "mid"], {
     required_error: "Please select a project category",
   }),
@@ -77,7 +77,7 @@ const formSchema = z.object({
       })
     )
     .refine(
-      (images) => images.length > 0 && images.length <= 5,
+      (images) => images.length > 0 && images.length <= 10,
       "Please select between 1 and 5 images"
     ),
 });
