@@ -1,3 +1,4 @@
+
 export type SectionType = "text" | "list";
 
 export interface Section {
@@ -33,3 +34,4 @@ export interface ProjectsApiResponse {
   projects: Project[];
   pagination: PaginationInfo;
 }
+

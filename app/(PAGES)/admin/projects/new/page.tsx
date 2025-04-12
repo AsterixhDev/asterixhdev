@@ -26,6 +26,7 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { Textarea } from "@/components/ui/textarea";
 import { Section } from "@/lib/types";
+import { ProjectFormSchema } from "@/lib/types/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Trash2Icon, X } from "lucide-react"; // Add this import
 import { useState } from "react";
@@ -42,45 +43,7 @@ export type ProjectFormValues = {
   liveUrl?: string | undefined;
 };
 
-export const formSchema = z.object({
-  category: z.enum(["best", "mid"], {
-    required_error: "Please select a project category",
-  }),
-  title: z.string().min(2, {
-    message: "Project title must be at least 2 characters.",
-  }),
-  description: z.string().min(10, {
-    message: "Project description must be at least 10 characters.",
-  }),
-  githubUrl: z
-    .string()
-    .url({
-      message: "Please enter a valid URL.",
-    })
-    .optional(),
-  liveUrl: z
-    .string()
-    .url({
-      message: "Please enter a valid URL.",
-    })
-    .optional(),
-  technologies: z
-    .array(z.string())
-    .refine((techs) => techs.length > 0, "Please add at least one technology."),
-  projectImages: z
-    .array(
-      z.object({
-        filename: z.string(),
-        url: z.string(),
-        mimetype: z.string().optional(),
-        size: z.number(),
-      })
-    )
-    .refine(
-      (images) => images.length > 0 && images.length <= 10,
-      "Please select between 1 and 5 images"
-    ),
-});
+
 
 export default function NewProjectPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -88,8 +51,8 @@ export default function NewProjectPage() {
   const [currentTechnology, setCurrentTechnology] = useState("");
   const [technologies, setTechnologies] = useState<string[]>([]);
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<z.infer<typeof ProjectFormSchema>>({
+    resolver: zodResolver(ProjectFormSchema),
     defaultValues: {
       title: "",
       description: "",
@@ -119,7 +82,7 @@ export default function NewProjectPage() {
     form.setValue("technologies", newTechnologies);
   };
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof ProjectFormSchema>) {
     setIsSubmitting(true);
     const projectData: ProjectFormValues = {
       ...values,

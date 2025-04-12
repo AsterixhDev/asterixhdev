@@ -1,7 +1,7 @@
 "use client";
 
 import { ImageFile } from "@/app/(PAGES)/admin/files/page";
-import { formSchema, ProjectFormValues } from "@/app/(PAGES)/admin/projects/new/page";
+import { ProjectFormValues } from "@/app/(PAGES)/admin/projects/new/page";
 import { FileMetadata } from "@/app/storage/files/[bucketname]/[filename]/route";
 import Loader from "@/components/Loader";
 import { RippleButton } from "@/components/magicui/ripple-button";
@@ -31,13 +31,13 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { Textarea } from "@/components/ui/textarea";
 import { Project, Section } from "@/lib/types";
+import { ProjectFormSchema } from "@/lib/types/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Trash2Icon, X } from "lucide-react"; // Add this import
 import { useRouter } from "next/navigation";
 import { use, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-
 
 
 
@@ -101,8 +101,8 @@ export default function EditProjectPage({
   
     }, [imagesUrl]);
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<z.infer<typeof ProjectFormSchema>>({
+    resolver: zodResolver(ProjectFormSchema),
     defaultValues: {
       title:"",
       description:"",
@@ -150,7 +150,7 @@ export default function EditProjectPage({
     form.setValue("technologies", newTechnologies);
   };
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof ProjectFormSchema>) {
     setIsSubmitting(true);
     const projectData: ProjectFormValues = {
       ...values,
