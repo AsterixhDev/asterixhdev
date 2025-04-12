@@ -124,6 +124,7 @@ export default function EditProjectPage({
         form.setValue("technologies",project.technologies)
         form.setValue("title",project.title)
         setSections(project.sections)
+        setTechnologies(project.technologies)
         setImagesUrl(project.projectImages)
     }
   }, [form, project])
