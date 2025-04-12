@@ -5,7 +5,7 @@ module.exports = {
   excludes: ['/admin/*', '/server-sitemap.xml'],
   robotsTxtOptions: {
     additionalSitemaps: [
-      'https://asterixhdev.vercel.app/server-sitemap.xml',
+      'https://asterixhdev.vercel.app/sitemap-0.xml',
     ],
   },
 }
