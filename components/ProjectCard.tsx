@@ -82,7 +82,7 @@ export default function ProjectCard({ className, project, index,showEdit=false }
                 {
                   showEdit&&<Link href={`/projects/${project?.title}/edit`}>
                   <RippleButton variant="secondary" className="!rounded-full shrink-0 bg-primary/40 border-none !size-10 *:!p-0 *:flex *:items-center *:justify-center">
-                    <i className="pi pi-pi-pencil text-primary-foreground size-full block"></i>
+                    <i className="pi pi-pencil text-primary-foreground size-full block"></i>
                   </RippleButton>
                 </Link>
                 }
