@@ -106,27 +106,23 @@ export default function Projects() {
           </div>
         ) : (
           <>
-            <TabsContent value="all">
-              <ul className="w-full grid grid-cols-[repeat(auto-fill,_minmax(250px,_1fr))] gap-4">
-                {state.projects.all.map((project) => (
-                  <ProjectCard key={project._id} project={project} />
-                ))}
-              </ul>
-            </TabsContent>
-            <TabsContent value="best">
-              <ul className="w-full grid grid-cols-[repeat(auto-fill,_minmax(250px,_1fr))] gap-4">
-                {state.projects.best.map((project) => (
-                  <ProjectCard key={project._id} project={project} />
-                ))}
-              </ul>
-            </TabsContent>
-            <TabsContent value="mid">
-              <ul className="w-full grid grid-cols-[repeat(auto-fill,_minmax(250px,_1fr))] gap-4">
-                {state.projects.mid.map((project) => (
-                  <ProjectCard key={project._id} project={project} />
-                ))}
-              </ul>
-            </TabsContent>
+            {
+              Object.keys(state.projects).map((k) => {
+                const key = k as keyof GroupedProjects;
+                const category = state.projects[key];
+                return (
+                  category.length > 0 && (
+                    <TabsContent key={k} value={k}>
+                      <ul className="w-full grid grid-cols-[repeat(auto-fill,_minmax(250px,_1fr))] gap-4">
+                        {category.map((project, index) => (
+                          <ProjectCard key={project._id} index={index + 1} project={project} />
+                        ))}
+                      </ul>
+                    </TabsContent>
+                  )
+                );
+              })
+            }
           </>
         )}
       </Tabs>
