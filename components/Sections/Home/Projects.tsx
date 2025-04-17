@@ -76,7 +76,7 @@ export default function Projects() {
         </p>
       </div>
 
-      <Tabs defaultValue={state.projects.length>0?Object.keys(state.projects)[0]:'templates'} className="w-full">
+      <Tabs defaultValue={Object.keys(state.projects).length>0?Object.keys(state.projects)[0]:'templates'} className="w-full">
         <TabsList className="w-1/2 mx-auto mb-4">
           {Object.keys(state.projects).map((k) => {
             const category = state.projects[k as keyof GroupedProjects];

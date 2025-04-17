@@ -17,7 +17,7 @@ export default function Home() {
 
         <div className="w-full flex sm:flex-row flex-col-reverse sm:items-center gap-4">
           <ContactForm />
-          <div className="size-full flex items-center justify-center flex-col">
+          <div className="size-full flex items-center justify-center flex-col gap-2">
             <span className="w-full flex items-center justify-center drop-shadow-2xl shadow-primary">
               <Illustration1
                 svg={{
@@ -36,6 +36,31 @@ export default function Home() {
                 Hire Me to Bring Your Vision to Life
               </p>
             </div>
+            <nav className="mt-2" aria-label="Social Links">
+            <ul className="socialLinks">
+              <li>
+                <a href="https://www.github.com/CodeWithAsterixh">
+                  <i className="pi pi-github"></i>
+                </a>
+              </li>
+              <li>
+                <a href="https://x.com/AsterixhThanks?t=URfI8qwSIK1SbDijca99BA&s=09">
+                  <i className="pi pi-twitter"></i>
+                </a>
+              </li>
+              <li>
+                <a href="https://www.instagram.com/code_with_asterixh">
+                  <i className="pi pi-instagram"></i>
+                </a>
+              </li>
+
+              <li>
+                <a href="https://www.linkedin.com/in/paul-peter-eyinnaya?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app">
+                  <i className="pi pi-linkedin"></i>
+                </a>
+              </li>
+            </ul>
+          </nav>
           </div>
         </div>
       </div>

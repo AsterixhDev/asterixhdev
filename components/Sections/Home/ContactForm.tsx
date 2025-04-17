@@ -67,6 +67,10 @@ export default function ContactForm({}: Props) {
   return (
     <div className="w-full sm:min-w-[400px]">
       <div className="w-full max-w-2xl mx-auto bg-black/20 backdrop-blur-lg p-8 rounded-lg shadow-lg text-white">
+      <div className="mb-5 pb-3 border-b-2 border-b-foreground w-full">
+        <h1 className="text-xl font-bold">Send a Quick message</h1>
+        <span className="text-xs flex items-center gap-1 text-primary"><i className="pi pi-info border rounded-full p-1 scale-50"></i><strong>please check spam box for responses</strong></span>
+      </div>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
             <div className="w-full flex sm:flex-row flex-col gap-4">

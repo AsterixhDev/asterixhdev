@@ -86,6 +86,7 @@ export default function EditProjectPage({
             url: `/storage/files/images/${data.filename}`,
             size: data.chunkSize,
             mimetype: data.contentType,
+            metadata:data.metadata,
             uploadDate:data.uploadDate
           }]))
         } catch (error) {

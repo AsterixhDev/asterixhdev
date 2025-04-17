@@ -94,6 +94,7 @@ export default function AboutSection() {
               difference. Let’s turn your vision into an exceptional digital
               experience.
             </p>
+            <a href="/myResume.pdf" download={"peter paul (asterixh)-frontend-developer-resume"} target="_blank">
             <VariantInteractiveButton
               secondaryHoverContent={
                 <>
@@ -106,6 +107,7 @@ export default function AboutSection() {
             >
               Download CV
             </VariantInteractiveButton>
+            </a>
           </motion.div>
         </div>
       </div>
