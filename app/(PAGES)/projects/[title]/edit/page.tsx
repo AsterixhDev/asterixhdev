@@ -86,6 +86,7 @@ export default function EditProjectPage({
             url: `/storage/files/images/${data.filename}`,
             size: data.chunkSize,
             mimetype: data.contentType,
+            metadata:data.metadata,
             uploadDate:data.uploadDate
           }]))
         } catch (error) {
@@ -224,8 +225,8 @@ export default function EditProjectPage({
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        <SelectItem value="best">Best Project</SelectItem>
-                        <SelectItem value="mid">Mid Project</SelectItem>
+                        <SelectItem value="product">Products</SelectItem>
+                        <SelectItem value="templates">Templates</SelectItem>
                       </SelectContent>
                     </Select>
                     <FormDescription>
