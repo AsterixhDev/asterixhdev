@@ -2,16 +2,13 @@
 
 import ProjectCard from "@/components/ProjectCard";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { groupArray } from "@/lib/groupArray";
 import { ProjectsApiResponse } from "@/lib/types";
 import clsx from "clsx";
 import * as motion from "motion/react-client";
 import { useEffect, useState } from "react";
 
-type GroupedProjects = {
-  all: ProjectsApiResponse["projects"];
-  best: ProjectsApiResponse["projects"];
-  mid: ProjectsApiResponse["projects"];
-};
+type GroupedProjects = Record<string, ProjectsApiResponse["projects"]>;
 export default function Projects() {
   const [state, setState] = useState<{
     projects: GroupedProjects;
@@ -35,12 +32,8 @@ export default function Projects() {
         const data = (await res.json()) as ProjectsApiResponse;
 
         // Group projects by category
-        const grouped: GroupedProjects = {
-          all: data.projects,
-          best: data.projects.filter((p) => p.category === "best"),
-          mid: data.projects.filter((p) => p.category === "mid"),
-        };
-
+        const grouped = groupArray<GroupedProjects>(data.projects,"category")
+        
         setState((prev) => ({
           ...prev,
           loading: false,
@@ -83,7 +76,7 @@ export default function Projects() {
         </p>
       </div>
 
-      <Tabs defaultValue="all" className="w-full">
+      <Tabs defaultValue={state.projects.length>0?Object.keys(state.projects)[0]:'templates'} className="w-full">
         <TabsList className="w-1/2 mx-auto mb-4">
           {Object.keys(state.projects).map((k) => {
             const category = state.projects[k as keyof GroupedProjects];
@@ -112,7 +105,7 @@ export default function Projects() {
                 const category = state.projects[key];
                 return (
                   category.length > 0 && (
-                    <TabsContent key={k} value={k}>
+                    <TabsContent key={key} value={key}>
                       <ul className="w-full grid grid-cols-[repeat(auto-fill,_minmax(250px,_1fr))] gap-4">
                         {category.map((project, index) => (
                           <ProjectCard key={project._id} index={index + 1} project={project} />

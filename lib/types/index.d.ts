@@ -9,7 +9,7 @@ export interface Section {
 }
 export interface Project {
   _id: string;
-  category: "best" | "mid";
+  category: string;
   title: string;
   description: string;
   githubUrl?: string;

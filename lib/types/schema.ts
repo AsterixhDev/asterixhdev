@@ -1,9 +1,7 @@
 import { z } from "zod";
 
 export const ProjectFormSchema = z.object({
-    category: z.enum(["best", "mid"], {
-      required_error: "Please select a project category",
-    }),
+    category: z.string({required_error:"Please select a project category"}),
     title: z.string().min(2, {
       message: "Project title must be at least 2 characters.",
     }),
