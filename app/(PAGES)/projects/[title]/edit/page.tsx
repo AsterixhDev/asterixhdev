@@ -225,8 +225,8 @@ export default function EditProjectPage({
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        <SelectItem value="product">Products</SelectItem>
-                        <SelectItem value="templates">Templates</SelectItem>
+                        <SelectItem value="product">Product</SelectItem>
+                        <SelectItem value="templates">Template</SelectItem>
                       </SelectContent>
                     </Select>
                     <FormDescription>
