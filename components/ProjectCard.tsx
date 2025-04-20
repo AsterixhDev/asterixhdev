@@ -80,17 +80,17 @@ export default function ProjectCard({ className, project, index,showEdit=false }
               <div className="w-fit flex items-center gap-2">
               
                 {
-                  showEdit&&<Link href={`/projects/${project?.title}/edit`}>
+                  showEdit&&<Link target="_blank" href={`/projects/${project?.title}/edit`}>
                   <RippleButton variant="secondary" className="!rounded-full shrink-0 bg-primary/40 border-none !size-10 *:!p-0 *:flex *:items-center *:justify-center">
                     <i className="pi pi-pencil text-primary-foreground size-full block"></i>
                   </RippleButton>
                 </Link>
                 }
-              <Link href={`${project?.githubUrl}`}>
+              <a target="_blank" href={`${project?.githubUrl}`}>
                 <RippleButton className="!rounded-full shrink-0 bg-primary/40 border-none !size-10 *:!p-0 *:flex *:items-center *:justify-center">
                   <i className="pi pi-github text-primary-foreground size-full block"></i>
                 </RippleButton>
-              </Link>
+              </a>
               </div>
             </div>
             <p className="line-clamp-6">
@@ -100,15 +100,15 @@ export default function ProjectCard({ className, project, index,showEdit=false }
             </p>
           </div>
           <div className="w-full flex gap-2">
-            <Link className="w-full" href={`${project?.liveUrl}`}>
+            <a target="_blank" className="w-full" href={`${project?.liveUrl}`}>
               <RippleButton className="!w-full bg-black border-none text-primary-foreground *:!flex *:!items-center *:!gap-2">
                 Visit
                 <i className="pi pi-globe"></i>
               </RippleButton>
-            </Link>
+            </a>
             <Link className="w-full" href={`/projects/${project?.title}`}>
               <RippleButton className="!w-full bg-primary/40 border-none text-primary-foreground *:!flex *:!items-center *:!gap-2">
-                Read
+                more
                 <i className="pi pi-arrow-right"></i>
               </RippleButton>
             </Link>
