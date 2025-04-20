@@ -12,7 +12,7 @@ export interface ISection {
 export interface IProject extends Document {
   title: string;
   description: string;
-  category: "best" | "mid";  // Add this line
+  category: string;  // Add this line
   githubUrl?: string;
   liveUrl?: string;
   technologies: string[];
@@ -27,9 +27,8 @@ const ProjectSchema = new Schema<IProject>(
   {
     category: {
       type: String,
-      enum: ["best", "mid"],
       required: [true, "Project category is required"],
-      default: "mid"
+      default: "templates"
     },
     title: {
       type: String,

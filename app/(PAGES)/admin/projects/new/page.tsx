@@ -146,7 +146,7 @@ export default function NewProjectPage() {
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                      <SelectItem value="product">Products</SelectItem>
+                      <SelectItem value="product">Product</SelectItem>
                       <SelectItem value="templates">Templates</SelectItem>
                       </SelectContent>
                     </Select>
